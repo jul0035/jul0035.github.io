@@ -45,15 +45,33 @@
 <body>
 
     <div class="card">
-        <img src="photo.jpg" alt="Our Photo">
+        <!-- Updated to a generic image filename -->
+        <img src="photo.jpg" id="landing-photo" alt="Our Photo">
         
         <h1>Press play! ✨</h1>
         
+        <!-- Updated to support M4A audio -->
         <audio controls>
-            <source src="music.mp3" type="audio/mpeg">
+            <source src="music.m4a" type="audio/mp4">
             Your browser does not support the audio element.
         </audio>
     </div>
+
+    <script>
+        // Automatic extension fallback helper
+        // If photo.jpg fails to load, it will automatically try photo.png or photo.jpeg
+        const img = document.getElementById('landing-photo');
+        const extensions = ['png', 'jpeg', 'PNG', 'JPG', 'JPEG'];
+        let currentIndex = 0;
+
+        img.onerror = function() {
+            if (currentIndex < extensions.length) {
+                const srcWithoutExt = img.src.substring(0, img.src.lastIndexOf('.'));
+                img.src = srcWithoutExt + '.' + extensions[currentIndex];
+                currentIndex++;
+            }
+        };
+    </script>
 
 </body>
 </html>
