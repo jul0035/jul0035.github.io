@@ -6,7 +6,7 @@
     <title>For You</title>
     <style>
         body {
-            background-color: #ffe5ec; /* Cute pastel pink background */
+            background-color: #ffe5ec;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             flex-direction: column;
@@ -19,36 +19,66 @@
         }
         .card {
             background: white;
-            padding: 25px;
+            padding: 30px;
             border-radius: 20px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.05);
             text-align: center;
-            max-width: 380px;
+            max-width: 350px;
             width: 100%;
         }
-        video {
-            width: 100%;
+        img {
+            max-width: 100%;
             height: auto;
             border-radius: 15px;
-            outline: none;
+            margin-bottom: 20px;
         }
         h1 {
-            font-size: 1.4rem;
-            margin-top: 15px;
-            margin-bottom: 5px;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #ff4d6d;
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #c9184a;
         }
     </style>
 </head>
 <body>
 
     <div class="card">
-        <video controls playsinline poster="photo.jpg">
-            <source src="video.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-
-        <h1>Press play! ✨</h1>
+        <!-- Display your photo -->
+        <img src="photo.jpg" id="landing-photo" alt="Our Photo">
+        
+        <h1>I made something for you! ✨</h1>
+        
+        <!-- Replace YOUR_GOOGLE_DRIVE_LINK_HERE with your copied link -->
+        <a href="https://drive.google.com/file/d/1fciUI6PxDBDBar8LauUCua6cZEeN_SB-/view?usp=drive_link" target="_blank" class="btn">
+            ▶ Watch Video
+        </a>
     </div>
+
+    <script>
+        // Automatic extension fallback helper for photo
+        const img = document.getElementById('landing-photo');
+        const extensions = ['png', 'jpeg', 'PNG', 'JPG', 'JPEG'];
+        let currentIndex = 0;
+
+        img.onerror = function() {
+            if (currentIndex < extensions.length) {
+                const srcWithoutExt = img.src.substring(0, img.src.lastIndexOf('.'));
+                img.src = srcWithoutExt + '.' + extensions[currentIndex];
+                currentIndex++;
+            }
+        };
+    </script>
 
 </body>
 </html>
